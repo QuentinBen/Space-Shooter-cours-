@@ -17,8 +17,26 @@ public class PlayerController : MonoBehaviour
 
 	public Boundary boundary;
 
+	//SHOTS
+	public GameObject shot;
+	public Transform shotSpawn;
+
+	public float fireRate;
+	private float nextFire = 0.0f;
+
+	void Update()
+	{
+		//Fire Primary Weapon
+		if (Input.GetButton ("Fire1") && Time.time > nextFire) 
+		{
+			nextFire = Time.time + fireRate;
+			Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+		}
+	}
+
 	void FixedUpdate()
 	{
+		//movements
 		float moveHorizontal = Input.GetAxis("Horizontal");
 		float moveVertical = Input.GetAxis("Vertical");
 
@@ -31,6 +49,7 @@ public class PlayerController : MonoBehaviour
 				Mathf.Clamp (rb.position.z, boundary.zMin, boundary.zMax)
 			);
 
+		//lateral rotations by movements
 		rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
 	}
 }
