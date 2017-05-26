@@ -22,9 +22,7 @@ public class PlayerController : MonoBehaviour
 		float moveHorizontal = Input.GetAxis("Horizontal");
 		float moveVertical = Input.GetAxis("Vertical");
 
-		if (moveVertical != 0 || moveHorizontal != 0) 
-		{
-			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 			rb.velocity = movement * speed;
 
 			rb.position = new Vector3 (
@@ -33,7 +31,6 @@ public class PlayerController : MonoBehaviour
 				Mathf.Clamp (rb.position.z, boundary.zMin, boundary.zMax)
 			);
 
-			rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
-		}
+		rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
 	}
 }
