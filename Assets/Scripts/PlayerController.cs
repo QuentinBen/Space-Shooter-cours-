@@ -24,6 +24,13 @@ public class PlayerController : MonoBehaviour
 	public float fireRate;
 	private float nextFire = 0.0f;
 
+	private AudioSource shotAudio;
+
+	void Start()
+	{
+		shotAudio = GetComponent<AudioSource> ();
+	}
+
 	void Update()
 	{
 		//Fire Primary Weapon
@@ -31,6 +38,7 @@ public class PlayerController : MonoBehaviour
 		{
 			nextFire = Time.time + fireRate;
 			Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+			shotAudio.Play ();
 		}
 	}
 
